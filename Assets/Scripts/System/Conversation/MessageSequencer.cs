@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class MessageSequencer : MonoBehaviour
 {
@@ -7,36 +8,35 @@ public class MessageSequencer : MonoBehaviour
     [SerializeField]
     private string[] _messages = default;
 
-    // _messages フィールドから表示する現在のメッセージのインデックス。
-    // 何も指していない場合は -1 とする。
-    private int _currentIndex = -1;
-
     private void Start()
     {
-        MoveNext();
+        StartCoroutine(InputCoroutine());
     }
 
-    private void Update()
+    private IEnumerator InputCoroutine()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (_messages is null or { Length: 0 }) { yield break; }
+
+        var index = 0;
+        while (index < _messages.Length)
         {
             if (_printer.IsPrinting) { _printer.Skip(); }
-            else { MoveNext(); }
+            else { _printer?.ShowMessage(_messages[index++]); }
+
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            yield return null;
         }
     }
 
-    /// <summary>
-    /// 次のページに進む。
-    /// 次のページが存在しない場合は無視する。
-    /// </summary>
-    private void MoveNext()
+    private IEnumerator WaitSecOrInput(float second)
     {
-        if (_messages is null or { Length: 0 }) { return; }
-
-        if (_currentIndex + 1 < _messages.Length)
+        var time = 0f;
+        while (time < second)
         {
-            _currentIndex++;
-            _printer?.ShowMessage(_messages[_currentIndex]);
+            if (Input.GetMouseButtonDown(0)) { yield break; }
+
+            time += Time.deltaTime;
+            yield return null;
         }
     }
 }
