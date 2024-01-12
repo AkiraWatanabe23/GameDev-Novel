@@ -30,12 +30,11 @@ public class MessageSequencer : MonoBehaviour
 
     private IEnumerator WaitSecOrInput(float second)
     {
-        var time = 0f;
-        while (time < second)
+        for (float timer = 0f; timer < second; timer += Time.deltaTime)
         {
             if (Input.GetMouseButtonDown(0)) { yield break; }
 
-            time += Time.deltaTime;
+            timer += Time.deltaTime;
             yield return null;
         }
     }

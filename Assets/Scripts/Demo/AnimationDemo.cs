@@ -14,10 +14,7 @@ public class AnimationDemo : MonoBehaviour
     [SerializeField]
     private Color _to = Color.blue;
 
-    private void Start()
-    {
-        StartCoroutine(RunAsync());
-    }
+    private void Start() => StartCoroutine(RunAsync());
 
     private IEnumerator RunAsync()
     {
