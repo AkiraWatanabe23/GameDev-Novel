@@ -11,16 +11,12 @@ public class FadeCommand : INovelCommand
     [SerializeField]
     private FadeType _fadeType = FadeType.None;
 
-    public IEnumerator RegisterCoroutine()
+    public IEnumerator Coroutine => _fadeType switch
     {
-        return _fadeType switch
-        {
-            FadeType.FadeIn => FadeIn(),
-            FadeType.FadeOut => FadeOut(),
-            //FadeType.FadeColor => FadeColor(),
-            _ => null
-        };
-    }
+        FadeType.FadeIn => FadeIn(),
+        FadeType.FadeOut => FadeOut(),
+        _ => null
+    };
 
     private IEnumerator FadeIn(float duration = 1f)
     {

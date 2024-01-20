@@ -1616,6 +1616,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1316211478}
   - component: {fileID: 1316211479}
+  - component: {fileID: 1316211480}
   m_Layer: 0
   m_Name: NovelSystem
   m_TagString: Untagged
@@ -1650,7 +1651,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af2bd2c315d92a344b223a887079505d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _talkBlock: {fileID: 0}
+  _talkSheetPath: 
+  _commandsData: {fileID: 1316211480}
+  _talkBlock:
+    _talkCommands: []
+--- !u!114 &1316211480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316211477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 686f608afe372dc47b8933e63f870d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _commandDatas:
+  - _commandType: 1
+    _command:
+      rid: 8015213735603601408
+  references:
+    version: 2
+    RefIds:
+    - rid: 8015213735603601408
+      type: {class: FadeCommand, ns: , asm: Assembly-CSharp}
+      data:
+        _target: {fileID: 0}
+        _fadeType: 0
 --- !u!1 &1363314997
 GameObject:
   m_ObjectHideFlags: 0
