@@ -84,28 +84,18 @@ public class NovelSystemController : MonoBehaviour
         //実行する内容がある間回し続ける
         while (_currentTalkBlockIndex < _talkBlock.Length)
         {
-            RunningCoroutines();
+            yield return RunningCoroutines();
             //入力待機
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
-            yield return null;
 
             UpdateNextCoroutines();
         }
     }
 
-    //private void Update()
-    //{
-        //全て実行し終わったら終了
-        //if (_currentTalkBlockIndex >= _talkBlock.Length && !_isCoroutinesPlaying) { return; }
-
-        //if (Input.GetMouseButtonDown(0) && !_isCoroutinesPlaying) { UpdateNextCoroutines(); }
-        //RunningCoroutines();
-    //}
-
     /// <summary> 登録したデータの実行処理 </summary>
-    private void RunningCoroutines()
+    private IEnumerator RunningCoroutines()
     {
-        if (_enumerators.Count == 0) { _isCoroutinesPlaying = false; return; }
+        if (_enumerators.Count == 0) { _isCoroutinesPlaying = false; yield break; }
 
         Consts.Log("Running...");
         while (_enumerators.Count > 0)
@@ -115,6 +105,7 @@ public class NovelSystemController : MonoBehaviour
                 if (_enumerators[i] == null) { continue; }
                 if (!_enumerators[i].MoveNext()) { _enumerators.RemoveAt(i); }
             }
+            yield return null;
         }
     }
 
@@ -122,6 +113,7 @@ public class NovelSystemController : MonoBehaviour
     {
         if (_talkBlock == null) { Consts.LogError("データの割り当てがありません"); return; }
         if (_currentTalkBlockIndex + 1 >= _talkBlock.Length) { Consts.Log("全て終了しました"); return; }
+        if (_isCoroutinesPlaying) { Consts.Log("実行中です"); return; }
 
         _currentTalkBlockIndex++;
         //次に実行する処理の追加
