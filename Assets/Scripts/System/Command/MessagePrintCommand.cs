@@ -4,42 +4,44 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class MessagePrintCommand : INovelCommand
+public class MessagePrintCommand : SystemBase
 {
-    [SerializeField]
     private TMP_Text _characterNameText = default;
-    [SerializeField]
     private TMP_Text _messageText = default;
 
-    //メッセージを出力中かどうか
-    private bool _isPrinting = false;
-    private string _currentCharacter = "";
-    private string _currentMessage = "";
+    public override void Initialize()
+    {
+        _characterNameText = CommandsData.MessengerText;
+        _messageText = CommandsData.MessageText;
 
-    public IEnumerator Coroutine => PrintMessage();
+        CommandAction.OnMessagePrint += PrintMessage;
+    }
 
-    private IEnumerator PrintMessage(float showSpeed = 1f)
+    public override void OnDestroy()
+    {
+        CommandAction.OnMessagePrint -= PrintMessage;
+    }
+
+    private IEnumerator PrintMessage(string messenger, string message, float showSpeed = 1f)
     {
         if (_messageText == null) { Consts.LogError("表示用のTextの割り当てがありません"); yield break; }
 
-        _characterNameText.text = _currentCharacter;
+        _characterNameText.text = messenger;
         _messageText.text = "";
-        _isPrinting = true;
-
-        var message = _currentMessage;
 
         int index = -1;
         var interval = showSpeed / message.Length;
-        var waitSec = new WaitForSeconds(interval);
 
         while (index + 1 < message.Length)
         {
             index++;
             _messageText.text += message[index];
-            yield return waitSec;
+
+            float timer = 0f;
+            while (timer < interval) { timer += Time.deltaTime; yield return null; }
         }
 
         _messageText.text = message;
-        _isPrinting = false;
+        yield return null;
     }
 }

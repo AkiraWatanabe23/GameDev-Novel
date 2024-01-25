@@ -1,0 +1,13 @@
+﻿{
+  "MessageDatas": [
+    {
+      "TalkerName": "Kohaku",
+      "Message": "Hello World"
+    },
+
+    {
+      "TalkerName": "Misaki",
+      "Message": "Good Morning"
+    }
+  ]
+}

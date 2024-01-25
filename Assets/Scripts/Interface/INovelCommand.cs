@@ -3,8 +3,5 @@
 namespace NovelSystem
 {
     /// <summary> 次の会話に入ったタイミングでどのような動きをするか </summary>
-    public interface INovelCommand
-    {
-        public IEnumerator Coroutine { get; }
-    }
+    public interface INovelCommand { }
 }

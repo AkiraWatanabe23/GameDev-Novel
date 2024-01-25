@@ -1,39 +1,42 @@
 ﻿using Constants;
+using NovelSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using System.IO;
 using UnityEngine;
-using UnityEngine.Networking;
 
 [Serializable]
 public class MessageBlock
 {
-    public MessageData[] MessageData;
+    public MessageData[] MessageDatas;
 }
 
 public class NovelSystemController : MonoBehaviour
 {
-    [Tooltip("会話データを記入したスプレッドシートのURL")]
     [SerializeField]
-    private string _talkSheetPath = "";
+    private string _jsonDirectoryPath = "";
     [SerializeField]
-    private CommandsData _commandsData = default;
+    private CommandsData _commandsData = new();
+    [Tooltip("トーク1セット")]
     [SerializeField]
-    private TalkBlock _talkBlock = default;
+    private TalkBlock[] _talkBlock = default;
 
-    private string _downloadText = "";
     /// <summary> 会話セット内の実行中のインデックス </summary>
-    private int _currentIndex = -1;
+    private int _currentTalkBlockIndex = -1;
     /// <summary> 実行中のIEnumratorを格納するList </summary>
     private List<IEnumerator> _enumerators = default;
+    private CommandAction _commandAction = default;
 
-    public MessageBlock MessageBlock { get; private set; }
+    private MessageBlock _messageBlock = default;
+    private int _currentMessageIndex = 0;
+
+    private bool _isCoroutinesPlaying = false;
 
     private IEnumerator Start()
     {
         yield return Initialize();
-        _commandsData.Initialize();
+        CommandsDataInitialize();
         Load();
 
         StartCoroutine(InputReceiveCoroutine());
@@ -43,7 +46,7 @@ public class NovelSystemController : MonoBehaviour
     {
         if (_talkBlock == null) { Consts.LogWarning("データの割り当てがありません"); yield break; }
 
-        _currentIndex = -1;
+        _currentTalkBlockIndex = -1;
         _enumerators = new();
 
         yield return null;
@@ -51,77 +54,108 @@ public class NovelSystemController : MonoBehaviour
         Consts.Log("Finish Initialized");
     }
 
-    private async void Load() => MessageBlock = await SheetLoad<MessageBlock>(_talkSheetPath);
-
-    /// <summary> webURLを指定してスプレッドシートを読み込み、jsonファイルに変換する </summary>
-    public async Task<T> SheetLoad<T>(string requestURL)
+    private void CommandsDataInitialize()
     {
-        T loadData = default;
-        if (await TryGetText(requestURL)) { loadData = JsonUtility.FromJson<T>(_downloadText); }
+        _commandsData.Initialize(
+            _commandsData,
+            new FadeCommand(),
+            new MessagePrintCommand());
 
-        return loadData;
+        _commandAction = _commandsData.CommandAction;
     }
 
-    /// <summary> WebRequestを送信し、テキストデータを取得する </summary>
-    private async Task<bool> TryGetText(string requestURL)
+    private void Load() => _messageBlock = SheetLoad<MessageBlock>(_jsonDirectoryPath);
+
+    public T SheetLoad<T>(string path)
     {
-        UnityWebRequest www = UnityWebRequest.Get(requestURL);
-        var operation = www.SendWebRequest();
+        if (!File.Exists(path)) { Consts.LogError("File not found"); return default; }
 
-        Consts.Log("loading...");
+        var json = File.ReadAllText(path);
+        T loadData = JsonUtility.FromJson<T>(json);
 
-        //終わるまで待機
-        while (!operation.isDone) { await Task.Delay(100); }
-
-        if (www.result == UnityWebRequest.Result.Success)
-        {
-            _downloadText = www.downloadHandler.text;
-
-            // 結果をテキストとして表示します
-            Consts.Log("Load Success!");
-            return true;
-        }
-        else { Consts.LogError($"Load Failed : {www.error}"); return false; }
+        return loadData;
     }
 
     private IEnumerator InputReceiveCoroutine()
     {
         //全て実行し終わったら終了
-        if (_currentIndex >= _talkBlock.TalkCommands.Length) { yield break; }
+        if (_currentTalkBlockIndex >= _talkBlock.Length) { yield break; }
 
         //実行する内容がある間回し続ける
-        while (_currentIndex < _talkBlock.TalkCommands.Length)
+        while (_currentTalkBlockIndex < _talkBlock.Length)
         {
-            Run();
+            RunningCoroutines();
             //入力待機
             yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
             yield return null;
+
+            UpdateNextCoroutines();
         }
     }
 
-    public void AddCoroutines(params IEnumerator[] enumerators)
-    {
-        if (enumerators == null) { return; }
-        foreach (var enumerator in enumerators) { _enumerators.Add(enumerator); }
-    }
+    //private void Update()
+    //{
+        //全て実行し終わったら終了
+        //if (_currentTalkBlockIndex >= _talkBlock.Length && !_isCoroutinesPlaying) { return; }
+
+        //if (Input.GetMouseButtonDown(0) && !_isCoroutinesPlaying) { UpdateNextCoroutines(); }
+        //RunningCoroutines();
+    //}
 
     /// <summary> 登録したデータの実行処理 </summary>
-    private IEnumerator RunningCoroutines()
+    private void RunningCoroutines()
     {
-        if (_enumerators.Count == 0) { yield break; }
+        if (_enumerators.Count == 0) { _isCoroutinesPlaying = false; return; }
 
-        for (int i = 0; i < _enumerators.Count; i++)
+        Consts.Log("Running...");
+        while (_enumerators.Count > 0)
         {
-            if (_enumerators[i] != null && !_enumerators[i].MoveNext()) { _enumerators.RemoveAt(i); }
+            for (int i = _enumerators.Count - 1; i >= 0; i--)
+            {
+                if (_enumerators[i] == null) { continue; }
+                if (!_enumerators[i].MoveNext()) { _enumerators.RemoveAt(i); }
+            }
         }
     }
 
-    private void Run()
+    private void UpdateNextCoroutines()
     {
         if (_talkBlock == null) { Consts.LogError("データの割り当てがありません"); return; }
-        if (_currentIndex + 1 >= _talkBlock.TalkCommands.Length) { Consts.Log("全て終了しました"); return; }
+        if (_currentTalkBlockIndex + 1 >= _talkBlock.Length) { Consts.Log("全て終了しました"); return; }
 
-        _currentIndex++;
-        AddCoroutines(_talkBlock.TalkCommands[_currentIndex].Coroutines);
+        _currentTalkBlockIndex++;
+        //次に実行する処理の追加
+        AddCoroutines(_talkBlock[_currentTalkBlockIndex]);
     }
+
+    private void AddCoroutines(TalkBlock talkBlock)
+    {
+        foreach (var command in talkBlock.Commands) { GetCommand(command); }
+        _isCoroutinesPlaying = true;
+    }
+
+    private void GetCommand(INovelCommand command)
+    {
+        IEnumerator enumerator = null;
+        if (command is Fade)
+        {
+            var fadeCommand = (Fade)command;
+            enumerator = fadeCommand.FadeType switch
+            {
+                FadeType.FadeIn => _commandAction.OnFadeIn?.Invoke(fadeCommand.Target, 1f),
+                FadeType.FadeOut => _commandAction.OnFadeOut?.Invoke(fadeCommand.Target, 1f),
+                _ => null
+            };
+        }
+        else if (command is MessagePrint)
+        {
+            enumerator = _commandAction.OnMessagePrint?.Invoke(
+                _messageBlock.MessageDatas[_currentMessageIndex].TalkerName, _messageBlock.MessageDatas[_currentMessageIndex].Message, 1f);
+
+            _currentMessageIndex++;
+        }
+        _enumerators.Add(enumerator);
+    }
+
+    private void OnDestroy() => _commandsData.OnDestroy();
 }

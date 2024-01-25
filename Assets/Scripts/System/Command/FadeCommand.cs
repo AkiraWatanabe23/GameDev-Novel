@@ -4,27 +4,29 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FadeCommand : INovelCommand
+public class FadeCommand : SystemBase
 {
-    [SerializeField]
-    private Image _target = default;
-    [SerializeField]
-    private FadeType _fadeType = FadeType.None;
-
-    public IEnumerator Coroutine => _fadeType switch
+    public override void Initialize()
     {
-        FadeType.FadeIn => FadeIn(),
-        FadeType.FadeOut => FadeOut(),
-        _ => null
-    };
+        CommandAction.OnFadeIn += FadeIn;
+        CommandAction.OnFadeOut += FadeOut;
+        CommandAction.OnFadeColor += FadeColor;
+    }
 
-    private IEnumerator FadeIn(float duration = 1f)
+    public override void OnDestroy()
     {
-        if (!_target.gameObject.activeSelf) { _target.gameObject.SetActive(true); }
+        CommandAction.OnFadeIn -= FadeIn;
+        CommandAction.OnFadeOut -= FadeOut;
+        CommandAction.OnFadeColor -= FadeColor;
+    }
+
+    private IEnumerator FadeIn(Image target, float duration = 1f)
+    {
+        if (!target.gameObject.activeSelf) { target.gameObject.SetActive(true); }
 
         //α値(透明度)を 1 -> 0 にする(少しずつ明るくする)
         float alpha = 1f;
-        Color color = _target.color;
+        Color color = target.color;
 
         while (alpha > 0f)
         {
@@ -33,19 +35,19 @@ public class FadeCommand : INovelCommand
             if (alpha <= 0f) { alpha = 0f; }
 
             color.a = alpha;
-            _target.color = color;
+            target.color = color;
             yield return null;
         }
         Consts.Log("Finish FadeIn");
     }
 
-    private IEnumerator FadeOut(float duration = 1f)
+    private IEnumerator FadeOut(Image target, float duration = 1f)
     {
-        if (!_target.gameObject.activeSelf) { _target.gameObject.SetActive(true); }
+        if (!target.gameObject.activeSelf) { target.gameObject.SetActive(true); }
 
         //α値(透明度)を 0 -> 1 にする(少しずつ暗くする)
         float alpha = 0f;
-        Color color = _target.color;
+        Color color = target.color;
 
         while (alpha < 1f)
         {
@@ -54,17 +56,17 @@ public class FadeCommand : INovelCommand
             if (alpha >= 1f) { alpha = 1f; }
 
             color.a = alpha;
-            _target.color = color;
+            target.color = color;
             yield return null;
         }
         Consts.Log("Finish FadeOut");
     }
 
-    private IEnumerator FadeColor(Color from, Color to, float duration = 1f)
+    private IEnumerator FadeColor(Image target, Color from, Color to, float duration = 1f)
     {
         for (float timer = 0f; timer < duration; timer += Time.deltaTime)
         {
-            _target.color = Color.Lerp(from, to, timer / duration);
+            target.color = Color.Lerp(from, to, timer / duration);
             yield return null;
         }
     }

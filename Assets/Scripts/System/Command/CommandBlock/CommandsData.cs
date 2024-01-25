@@ -1,32 +1,58 @@
 ﻿using NovelSystem;
 using System;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CommandsData : MonoBehaviour
+[Serializable]
+public class CommandsData
 {
-    [SerializeField]
-    private CommandPair[] _commandDatas = default;
+    [field: SerializeField]
+    public TMP_Text MessengerText { get; private set; }
+    [field: SerializeField]
+    public TMP_Text MessageText { get; private set; }
 
-    public Dictionary<CommandType, INovelCommand> NovelCommands { get; private set; }
+    [field: SerializeField]
+    public ImagesData[] CharacterImages { get; private set; }
 
-    public void Initialize()
+    private SystemBase[] _systems = default;
+
+    public CommandAction CommandAction { get; private set; }
+
+    public void Initialize(CommandsData commandsData, params SystemBase[] systems)
     {
-        NovelCommands ??= new();
-        foreach (var command in _commandDatas) { NovelCommands.Add(command.CommandType, command.Command); }
+        CommandAction = new();
+
+        _systems = systems;
+        for (int i = 0; i < _systems.Length; i++)
+        {
+            systems[i].CommandsData = commandsData;
+            systems[i].CommandAction = CommandAction;
+            _systems[i].Initialize();
+        }
+    }
+
+    public void OnDestroy()
+    {
+        foreach (var system in _systems) { system.OnDestroy(); }
     }
 }
 
 [Serializable]
-public class CommandPair
+public class ImagesData
 {
-    [SerializeField]
-    private CommandType _commandType = CommandType.None;
-    [SubclassSelector]
-    [SerializeReference]
-    [SerializeField]
-    private INovelCommand _command = default;
+    [field: SerializeField]
+    public Image CharacterImage { get; private set; }
 
-    public CommandType CommandType => _commandType;
-    public INovelCommand Command => _command;
+    [Tooltip("表情差分のSprite")]
+    [field: SerializeField]
+    public Sprite Normal { get; private set; }
+    [field: SerializeField]
+    public Sprite ClosedEyes { get; private set; }
+    [field: SerializeField]
+    public Sprite Surprised { get; private set; }
+    [field: SerializeField]
+    public Sprite Angry { get; private set; }
+    [field: SerializeField]
+    public Sprite Happy { get; private set; }
 }
