@@ -570,9 +570,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1022426380}
+  - {fileID: 1414866768}
   - {fileID: 246167441}
   - {fileID: 76379747}
-  - {fileID: 1414866768}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -843,7 +843,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f9d9b12f6fc6d36418f8f92f9c3e4493, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1588,7 +1588,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7ef7e25882a66fa429ced05c37b32303, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1669,15 +1669,36 @@ MonoBehaviour:
       <Happy>k__BackingField: {fileID: 21300000, guid: e40d98bf8ef3a4a428c7b6ee9dee1228, type: 3}
   _talkBlock:
   - _commands:
-    - rid: 8015213845897281538
+    - rid: 8015213845897281539
+    - rid: 8015213845897281540
   - _commands:
     - rid: 8015213845897281538
+    - rid: 8015213845897281541
+    - rid: 8015213845897281542
   references:
     version: 2
     RefIds:
     - rid: 8015213845897281538
       type: {class: MessagePrint, ns: , asm: Assembly-CSharp}
       data: 
+    - rid: 8015213845897281539
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 848499090}
+    - rid: 8015213845897281540
+      type: {class: MessagePrint, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8015213845897281541
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 848499090}
+    - rid: 8015213845897281542
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 1260065680}
 --- !u!1 &1363314997
 GameObject:
   m_ObjectHideFlags: 0
