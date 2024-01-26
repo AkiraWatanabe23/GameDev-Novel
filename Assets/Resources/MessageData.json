@@ -2,12 +2,52 @@
   "MessageDatas": [
     {
       "TalkerName": "Kohaku",
-      "Message": "Hello World"
+      "Message": "こんにちは！最近どうしてる？"
     },
 
     {
       "TalkerName": "Misaki",
-      "Message": "Good Morning"
+      "Message": "こんにちは！元気だよ。最近は仕事が忙しくてね。"
+    },
+
+    {
+      "TalkerName": "Kohaku",
+      "Message": "そうなんだ。大変そうだね。でも、何か楽しいことはあった？"
+    },
+
+    {
+      "TalkerName": "Misaki",
+      "Message": "うん、先週末友達とピクニックに行ったんだ。とても楽しかったよ。自然の中でリフレッシュできた感じがしたよ。"
+    },
+
+    {
+      "TalkerName": "Kohaku",
+      "Message": "それは素晴らしいね。私も最近、ストレスがたまってきたから、何か癒しの方法を見つけたいと思ってるんだ。"
+    },
+
+    {
+      "TalkerName": "Misaki",
+      "Message": "そうなんだ。癒しの方法は人それぞれだけど、自分の好きなことに時間を使うのがいいかもしれないね。何か趣味はある？"
+    },
+
+    {
+      "TalkerName": "Kohaku",
+      "Message": "趣味...、最近あまり時間がなくてなかなかできないんだ。でも、昔はギターを弾くのが好きだったな。"
+    },
+
+    {
+      "TalkerName": "Misaki",
+      "Message": "それなら、またギターを弾いてみるのはどうだろう？音楽って心を癒してくれるし、楽しいよ。"
+    },
+
+    {
+      "TalkerName": "Kohaku",
+      "Message": " いいアイデアだね。そうしようかな。ありがとう。"
+    },
+
+    {
+      "TalkerName": "Misaki",
+      "Message": "どういたしまして！いつでも話しかけてね。一緒にリフレッシュしよう！"
     }
   ]
 }

@@ -20,6 +20,15 @@ public class FadeCommand : SystemBase
         CommandAction.OnFadeColor -= FadeColor;
     }
 
+    public override void OnComplete(Image target, FadeType fadeType)
+    {
+        Color color = target.color;
+        if (fadeType == FadeType.FadeIn) { color.a = 0f; Consts.Log("Finish FadeIn"); }
+        else if (fadeType == FadeType.FadeOut) { color.a = 1f; Consts.Log("Finish FadeOut"); }
+
+        target.color = color;
+    }
+
     private IEnumerator FadeIn(Image target, float duration = 1f)
     {
         if (!target.gameObject.activeSelf) { target.gameObject.SetActive(true); }
@@ -38,7 +47,7 @@ public class FadeCommand : SystemBase
             target.color = color;
             yield return null;
         }
-        Consts.Log("Finish FadeIn");
+        OnComplete(target, FadeType.FadeIn);
     }
 
     private IEnumerator FadeOut(Image target, float duration = 1f)
@@ -59,7 +68,7 @@ public class FadeCommand : SystemBase
             target.color = color;
             yield return null;
         }
-        Consts.Log("Finish FadeOut");
+        OnComplete(target, FadeType.FadeOut);
     }
 
     private IEnumerator FadeColor(Image target, Color from, Color to, float duration = 1f)

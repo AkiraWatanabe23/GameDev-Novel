@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -723,6 +723,7 @@ RectTransform:
   - {fileID: 1414866768}
   - {fileID: 246167441}
   - {fileID: 76379747}
+  - {fileID: 1153152908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -754,7 +755,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766155048}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -762,7 +763,7 @@ RectTransform:
   - {fileID: 1260065679}
   - {fileID: 558369628}
   m_Father: {fileID: 1414866768}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -780,8 +781,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ea2780621202b47944bbe0353fb316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Image1>k__BackingField: {fileID: 1260065680}
-  <Image2>k__BackingField: {fileID: 558369629}
   <Normal>k__BackingField: {fileID: 21300000, guid: 7ef7e25882a66fa429ced05c37b32303, type: 3}
   <ClosedEyes>k__BackingField: {fileID: 21300000, guid: 46bc869adf0f59240aeba9954d104a07, type: 3}
   <Surprised>k__BackingField: {fileID: 21300000, guid: 8ab5ef43fb61d8242a5f32c05bb4400b, type: 3}
@@ -846,15 +845,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Messenger
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c4a47ec7287dddb48a8dd6b02fab9616, type: 2}
+  m_sharedMaterial: {fileID: -3285526357769771230, guid: c4a47ec7287dddb48a8dd6b02fab9616, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4280229663
+  m_fontColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -871,8 +870,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1046,8 +1045,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02ea2780621202b47944bbe0353fb316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Image1>k__BackingField: {fileID: 848499090}
-  <Image2>k__BackingField: {fileID: 583988509}
   <Normal>k__BackingField: {fileID: 21300000, guid: f9d9b12f6fc6d36418f8f92f9c3e4493, type: 3}
   <ClosedEyes>k__BackingField: {fileID: 21300000, guid: 3fd279de38afc2a4ba14176ba1856d99, type: 3}
   <Surprised>k__BackingField: {fileID: 21300000, guid: 2bb1fbb084944c64f9306cdc4bd09180, type: 3}
@@ -1428,6 +1425,42 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1153152907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1153152908}
+  m_Layer: 5
+  m_Name: SceneFade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1153152908
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153152907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1852140521}
+  m_Father: {fileID: 651354522}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1157996776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,9 +1845,11 @@ MonoBehaviour:
     <MessageText>k__BackingField: {fileID: 1925024596}
   _talkBlock:
   - _commands:
+    - rid: 8015213859990405126
+  - _commands:
+    - rid: 8015213845897281540
     - rid: 8015213859990405120
     - rid: 8015213845897281539
-    - rid: 8015213845897281540
   - _commands:
     - rid: 8015213845897281538
     - rid: 8015213859990405122
@@ -1822,6 +1857,51 @@ MonoBehaviour:
     - rid: 8015213845897281541
     - rid: 8015213859990405121
     - rid: 8015213845897281542
+  - _commands:
+    - rid: 8015213859990405128
+    - rid: 8015213859990405129
+    - rid: 8015213859990405130
+    - rid: 8015213859990405131
+  - _commands:
+    - rid: 8015213859990405132
+    - rid: 8015213859990405133
+    - rid: 8015213859990405134
+    - rid: 8015213859990405135
+  - _commands:
+    - rid: 8015213859990405136
+    - rid: 8015213859990405137
+    - rid: 8015213859990405138
+    - rid: 8015213859990405139
+  - _commands:
+    - rid: 8015213859990405140
+    - rid: 8015213859990405141
+    - rid: 8015213859990405142
+    - rid: 8015213859990405143
+  - _commands:
+    - rid: 8015213859990405144
+    - rid: 8015213859990405148
+    - rid: 8015213859990405149
+    - rid: 8015213859990405150
+  - _commands:
+    - rid: 8015213859990405146
+    - rid: 8015213859990405151
+    - rid: 8015213859990405152
+    - rid: 8015213859990405153
+  - _commands:
+    - rid: 8015213859990405145
+    - rid: 8015213859990405154
+    - rid: 8015213859990405155
+    - rid: 8015213859990405156
+  - _commands:
+    - rid: 8015213859990405147
+    - rid: 8015213859990405157
+    - rid: 8015213859990405158
+    - rid: 8015213859990405159
+    - rid: 8015213859990405160
+    - rid: 8015213859990405161
+    - rid: 8015213859990405162
+  - _commands:
+    - rid: 8015213859990405127
   references:
     version: 2
     RefIds:
@@ -1857,7 +1937,7 @@ MonoBehaviour:
       data:
         <Actor>k__BackingField: {fileID: 766155050}
         <Target>k__BackingField: {fileID: 1260065680}
-        <FacialExpression>k__BackingField: 4
+        <FacialExpression>k__BackingField: 0
     - rid: 8015213859990405122
       type: {class: SpriteChange, ns: , asm: Assembly-CSharp}
       data:
@@ -1869,6 +1949,184 @@ MonoBehaviour:
       data:
         <FadeType>k__BackingField: 2
         <Target>k__BackingField: {fileID: 583988509}
+    - rid: 8015213859990405126
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 1852140522}
+    - rid: 8015213859990405127
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 1852140522}
+    - rid: 8015213859990405128
+      type: {class: MessagePrint, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8015213859990405129
+      type: {class: SpriteChange, ns: , asm: Assembly-CSharp}
+      data:
+        <Actor>k__BackingField: {fileID: 853169415}
+        <Target>k__BackingField: {fileID: 848499090}
+        <FacialExpression>k__BackingField: 2
+    - rid: 8015213859990405130
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 583988509}
+    - rid: 8015213859990405131
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 848499090}
+    - rid: 8015213859990405132
+      type: {class: MessagePrint, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8015213859990405133
+      type: {class: SpriteChange, ns: , asm: Assembly-CSharp}
+      data:
+        <Actor>k__BackingField: {fileID: 766155050}
+        <Target>k__BackingField: {fileID: 558369629}
+        <FacialExpression>k__BackingField: 4
+    - rid: 8015213859990405134
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 1260065680}
+    - rid: 8015213859990405135
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 558369629}
+    - rid: 8015213859990405136
+      type: {class: MessagePrint, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8015213859990405137
+      type: {class: SpriteChange, ns: , asm: Assembly-CSharp}
+      data:
+        <Actor>k__BackingField: {fileID: 853169415}
+        <Target>k__BackingField: {fileID: 583988509}
+        <FacialExpression>k__BackingField: 1
+    - rid: 8015213859990405138
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 848499090}
+    - rid: 8015213859990405139
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 583988509}
+    - rid: 8015213859990405140
+      type: {class: MessagePrint, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8015213859990405141
+      type: {class: SpriteChange, ns: , asm: Assembly-CSharp}
+      data:
+        <Actor>k__BackingField: {fileID: 766155050}
+        <Target>k__BackingField: {fileID: 1260065680}
+        <FacialExpression>k__BackingField: 2
+    - rid: 8015213859990405142
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 558369629}
+    - rid: 8015213859990405143
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 1260065680}
+    - rid: 8015213859990405144
+      type: {class: MessagePrint, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8015213859990405145
+      type: {class: MessagePrint, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8015213859990405146
+      type: {class: MessagePrint, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8015213859990405147
+      type: {class: MessagePrint, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 8015213859990405148
+      type: {class: SpriteChange, ns: , asm: Assembly-CSharp}
+      data:
+        <Actor>k__BackingField: {fileID: 853169415}
+        <Target>k__BackingField: {fileID: 848499090}
+        <FacialExpression>k__BackingField: 3
+    - rid: 8015213859990405149
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 583988509}
+    - rid: 8015213859990405150
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 848499090}
+    - rid: 8015213859990405151
+      type: {class: SpriteChange, ns: , asm: Assembly-CSharp}
+      data:
+        <Actor>k__BackingField: {fileID: 766155050}
+        <Target>k__BackingField: {fileID: 558369629}
+        <FacialExpression>k__BackingField: 0
+    - rid: 8015213859990405152
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 1260065680}
+    - rid: 8015213859990405153
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 558369629}
+    - rid: 8015213859990405154
+      type: {class: SpriteChange, ns: , asm: Assembly-CSharp}
+      data:
+        <Actor>k__BackingField: {fileID: 853169415}
+        <Target>k__BackingField: {fileID: 583988509}
+        <FacialExpression>k__BackingField: 2
+    - rid: 8015213859990405155
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 848499090}
+    - rid: 8015213859990405156
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 583988509}
+    - rid: 8015213859990405157
+      type: {class: SpriteChange, ns: , asm: Assembly-CSharp}
+      data:
+        <Actor>k__BackingField: {fileID: 766155050}
+        <Target>k__BackingField: {fileID: 1260065680}
+        <FacialExpression>k__BackingField: 4
+    - rid: 8015213859990405158
+      type: {class: SpriteChange, ns: , asm: Assembly-CSharp}
+      data:
+        <Actor>k__BackingField: {fileID: 853169415}
+        <Target>k__BackingField: {fileID: 848499090}
+        <FacialExpression>k__BackingField: 4
+    - rid: 8015213859990405159
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 558369629}
+    - rid: 8015213859990405160
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 1
+        <Target>k__BackingField: {fileID: 583988509}
+    - rid: 8015213859990405161
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 1260065680}
+    - rid: 8015213859990405162
+      type: {class: Fade, ns: , asm: Assembly-CSharp}
+      data:
+        <FadeType>k__BackingField: 2
+        <Target>k__BackingField: {fileID: 848499090}
 --- !u!1 &1363314997
 GameObject:
   m_ObjectHideFlags: 0
@@ -2279,7 +2537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2303,6 +2561,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737495929}
+  m_CullTransparentMesh: 1
+--- !u!1 &1852140520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1852140521}
+  - component: {fileID: 1852140523}
+  - component: {fileID: 1852140522}
+  m_Layer: 5
+  m_Name: FadePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1852140521
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852140520}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1153152908}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2000, y: 1200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1852140522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852140520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1852140523
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852140520}
   m_CullTransparentMesh: 1
 --- !u!1 &1873992984
 GameObject:
@@ -2581,15 +2914,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Message
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c4a47ec7287dddb48a8dd6b02fab9616, type: 2}
+  m_sharedMaterial: {fileID: -3285526357769771230, guid: c4a47ec7287dddb48a8dd6b02fab9616, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2606,8 +2939,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

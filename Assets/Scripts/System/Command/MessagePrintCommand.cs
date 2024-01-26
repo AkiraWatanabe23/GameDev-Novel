@@ -22,6 +22,12 @@ public class MessagePrintCommand : SystemBase
         CommandAction.OnMessagePrint -= PrintMessage;
     }
 
+    public override void OnComplete(string message)
+    {
+        _messageText.text = message;
+        Consts.Log("Finish show message");
+    }
+
     private IEnumerator PrintMessage(string messenger, string message, float showSpeed = 1f)
     {
         if (_messageText == null) { Consts.LogError("表示用のTextの割り当てがありません"); yield break; }

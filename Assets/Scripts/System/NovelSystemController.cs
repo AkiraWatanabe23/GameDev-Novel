@@ -87,7 +87,7 @@ public class NovelSystemController : MonoBehaviour
         {
             yield return RunningCoroutines();
             //入力待機
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !_isCoroutinesPlaying);
 
             UpdateNextCoroutines();
         }
@@ -96,7 +96,7 @@ public class NovelSystemController : MonoBehaviour
     /// <summary> 登録したデータの実行処理 </summary>
     private IEnumerator RunningCoroutines()
     {
-        if (_enumerators.Count == 0) { _isCoroutinesPlaying = false; yield break; }
+        if (_enumerators.Count == 0) { yield break; }
 
         Consts.Log("Running...");
         while (_enumerators.Count > 0)
@@ -104,17 +104,20 @@ public class NovelSystemController : MonoBehaviour
             for (int i = _enumerators.Count - 1; i >= 0; i--)
             {
                 if (_enumerators[i] == null) { continue; }
-                if (!_enumerators[i].MoveNext()) { _enumerators.RemoveAt(i); }
+
+                yield return _enumerators[i];
+                _enumerators.RemoveAt(i);
+                //if (!_enumerators[i].MoveNext()) { _enumerators.RemoveAt(i); }
             }
             yield return null;
         }
+        _isCoroutinesPlaying = false;
     }
 
     private void UpdateNextCoroutines()
     {
         if (_talkBlock == null) { Consts.LogError("データの割り当てがありません"); return; }
         if (_currentTalkBlockIndex + 1 >= _talkBlock.Length) { Consts.Log("全て終了しました"); return; }
-        if (_isCoroutinesPlaying) { Consts.Log("実行中です"); return; }
 
         _currentTalkBlockIndex++;
         //次に実行する処理の追加
@@ -130,9 +133,8 @@ public class NovelSystemController : MonoBehaviour
     private void GetCommand(INovelCommand command)
     {
         IEnumerator enumerator = null;
-        if (command is Fade)
+        if (command is Fade fadeCommand)
         {
-            var fadeCommand = (Fade)command;
             enumerator = fadeCommand.FadeType switch
             {
                 FadeType.FadeIn => _commandAction.OnFadeIn?.Invoke(fadeCommand.Target, 1f),
@@ -140,17 +142,15 @@ public class NovelSystemController : MonoBehaviour
                 _ => null
             };
         }
-        else if (command is MessagePrint)
+        else if (command is MessagePrint _)
         {
             enumerator = _commandAction.OnMessagePrint?.Invoke(
                 _messageBlock.MessageDatas[_currentMessageIndex].TalkerName, _messageBlock.MessageDatas[_currentMessageIndex].Message, 1f);
 
             _currentMessageIndex++;
         }
-        else if (command is SpriteChange)
+        else if (command is SpriteChange spriteChangeCommand)
         {
-            var spriteChangeCommand = (SpriteChange)command;
-
             enumerator = _commandAction.OnSpriteChange?.Invoke(
                 spriteChangeCommand.Actor, spriteChangeCommand.Target, spriteChangeCommand.FacialExpression);
         }
