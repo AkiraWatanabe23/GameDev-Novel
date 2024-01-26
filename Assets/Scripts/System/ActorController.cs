@@ -3,8 +3,20 @@ using UnityEngine.UI;
 
 public class ActorController : MonoBehaviour
 {
-    [SerializeField]
-    private Image _actorImage = default;
+    [field: SerializeField]
+    public Image Image1 { get; private set; }
+    [field: SerializeField]
+    public Image Image2 { get; private set; }
 
-    public Image ActorImage { get => _actorImage; set => _actorImage = value; }
+    [Tooltip("表情差分のSprite")]
+    [field: SerializeField]
+    public Sprite Normal { get; private set; }
+    [field: SerializeField]
+    public Sprite ClosedEyes { get; private set; }
+    [field: SerializeField]
+    public Sprite Surprised { get; private set; }
+    [field: SerializeField]
+    public Sprite Angry { get; private set; }
+    [field: SerializeField]
+    public Sprite Happy { get; private set; }
 }

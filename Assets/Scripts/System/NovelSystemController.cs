@@ -59,7 +59,8 @@ public class NovelSystemController : MonoBehaviour
         _commandsData.Initialize(
             _commandsData,
             new FadeCommand(),
-            new MessagePrintCommand());
+            new MessagePrintCommand(),
+            new SpriteChangeCommand());
 
         _commandAction = _commandsData.CommandAction;
     }
@@ -145,6 +146,13 @@ public class NovelSystemController : MonoBehaviour
                 _messageBlock.MessageDatas[_currentMessageIndex].TalkerName, _messageBlock.MessageDatas[_currentMessageIndex].Message, 1f);
 
             _currentMessageIndex++;
+        }
+        else if (command is SpriteChange)
+        {
+            var spriteChangeCommand = (SpriteChange)command;
+
+            enumerator = _commandAction.OnSpriteChange?.Invoke(
+                spriteChangeCommand.Actor, spriteChangeCommand.Target, spriteChangeCommand.FacialExpression);
         }
         _enumerators.Add(enumerator);
     }
